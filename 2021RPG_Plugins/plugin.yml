@@ -1,0 +1,5 @@
+main: com.tistory.workshop.Main
+name: 2021RPG_Plugin
+version: 1.0
+authors: krapoi, iqpizza
+description: default-plugin
