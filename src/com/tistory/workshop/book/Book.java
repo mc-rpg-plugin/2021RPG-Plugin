@@ -16,8 +16,6 @@ public class Book implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-
-        // TODO 들어온 사람한테 해당 책이 이미 있다면 더 이상 지급할 필요없음
         e.setJoinMessage("입장");
         Player player = e.getPlayer();  // 들어오는 사람
 
@@ -37,6 +35,9 @@ public class Book implements Listener {
         bookMeta.setAuthor("ME");   // 책 지은이
 
         book.setItemMeta(bookMeta);     // 해당 책에게 메타타입 적용
+
+        if (player.getInventory().contains(book))
+            return;
 
         player.getInventory().addItem(book);    // 들어오는 사람한테 책 한 권 지급
 
