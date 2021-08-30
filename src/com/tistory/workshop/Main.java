@@ -1,6 +1,7 @@
 package com.tistory.workshop;
 
 import com.tistory.workshop.book.Book;
+import com.tistory.workshop.command.RPGCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.event.Listener;
@@ -17,6 +18,8 @@ public class Main extends JavaPlugin implements Listener {
         consol.sendMessage("[플러그인 활성화 중 입니다.]");
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new Book(), this);
+
+        getCommand("rpg_").setExecutor(new RPGCommand());
     }
 
     @Override
