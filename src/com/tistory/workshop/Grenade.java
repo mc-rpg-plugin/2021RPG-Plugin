@@ -12,11 +12,11 @@ public class Grenade implements Listener {
     @EventHandler
     public void gnd(PlayerEggThrowEvent e){
 
-            if (e.getEgg().isDead()) {
+        Egg egg = e.getEgg();
+        egg.setVisualFire(true);
 
-                Egg egg = e.getEgg();
-                egg.getWorld().createExplosion(egg.getLocation(),(float) 7.5,false,false);
-
-            }
+        if (egg.isOnGround()) {
+            egg.getWorld().createExplosion(egg.getLocation(),(float) 7.5,false,false);
+        }
     }
 }

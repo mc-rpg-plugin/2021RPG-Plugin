@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.player.PlayerEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public class escape implements Listener {
 
@@ -15,7 +15,7 @@ public class escape implements Listener {
 
 
     @EventHandler
-    public void es(PlayerEvent e){
+    public void es(PlayerInteractEvent e){
 
         Player p = e.getPlayer();
         ClickType c = ClickType.SHIFT_LEFT;
