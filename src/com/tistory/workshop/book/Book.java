@@ -23,9 +23,14 @@ public class Book implements Listener {
         BookMeta bookMeta = (BookMeta) book.getItemMeta();      // 해당 책의 메타타입을 설정함
 
         BaseComponent[] page = new ComponentBuilder("Click me")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ setCharacter Fighter"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("파이터 클래스로 설정합니다.").create()))
+                .create();
+
+        /*BaseComponent[] page = new ComponentBuilder("Click me")
                 .event(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://spigot.org"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("GO TO SEE WEBSITE!").create()))
-                .create();
+                .create();*/
 
         // OPEN_URL 말고 명령어 사용하는 것도 존재함
 

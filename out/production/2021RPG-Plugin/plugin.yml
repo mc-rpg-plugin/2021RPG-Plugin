@@ -4,3 +4,7 @@ description: default-plugin
 main: com.tistory.workshop.Main
 name: 2021RPG_Plugin
 version: "1.0.0"
+commands:
+  rpg_:
+    description: 2021RPG-Plugin에서 사용될 명령어들입니다.
+    usage: /rpg_
