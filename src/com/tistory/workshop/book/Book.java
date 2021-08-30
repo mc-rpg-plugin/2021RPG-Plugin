@@ -41,7 +41,7 @@ public class Book implements Listener {
 
         book.setItemMeta(bookMeta);     // 해당 책에게 메타타입 적용
 
-        if (player.getInventory().contains(book))
+        if (player.getInventory().contains(book) || player.getInventory().contains(Material.WRITTEN_BOOK))
             return;
 
         player.getInventory().addItem(book);    // 들어오는 사람한테 책 한 권 지급
