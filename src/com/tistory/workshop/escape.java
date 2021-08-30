@@ -26,6 +26,7 @@ public class escape implements Listener {
             p.sendMessage("위치저장!");
         }else if (c.isKeyboardClick() && ispressed == true){
              p.teleport(pleyerpos);
+             p.getWorld().createExplosion(pleyerpos,3,false,false);
              pleyerpos = null;
              p.sendMessage("위치이동!");
              ispressed = false;
