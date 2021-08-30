@@ -16,12 +16,10 @@ public class Berserker implements Listener {
 
         Player p = (Player) e.getEntity();
         if(p.getHealth() - e.getDamage() <= 10){
-            p.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
             p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,1000000000,1));
         }else if(p.getHealth() - e.getDamage() <= 7 && p.getHealth() > 5 ){
             p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,1000000000,2));
         }else if(p.getHealth() - e.getDamage()<= 5){
-            p.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
             p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,1000000000,4));
         }
     }
