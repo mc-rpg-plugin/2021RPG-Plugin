@@ -6,8 +6,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
+
 
 public class escape implements Listener {
 
@@ -15,16 +17,16 @@ public class escape implements Listener {
 
 
     @EventHandler
-    public void es(PlayerInteractEvent e){
+    public void es(PlayerToggleSneakEvent e){
 
         Player p = e.getPlayer();
-        ClickType c = ClickType.SHIFT_LEFT;
+
         boolean ispressed = false;
-        if(c.isKeyboardClick() && ispressed == false){
+        if(e.getPlayer().isSneaking() && ispressed == false){
             pleyerpos.add(p.getLocation());
             ispressed = true;
             p.sendMessage("위치저장!");
-        }else if (c.isKeyboardClick() && ispressed == true){
+        }else if (e.getPlayer().isSneaking() && ispressed == true){
              p.teleport(pleyerpos);
              p.getWorld().createExplosion(pleyerpos,3,false,false);
              pleyerpos = null;
