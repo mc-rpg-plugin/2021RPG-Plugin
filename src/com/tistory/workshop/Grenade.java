@@ -15,8 +15,7 @@ public class Grenade implements Listener {
         Egg egg = e.getEgg();
         egg.setVisualFire(true);
 
-        if (egg.isOnGround()) {
-            egg.getWorld().createExplosion(egg.getLocation(),(float) 7.5,false,false);
-        }
+        egg.getWorld().createExplosion(egg.getLocation(),(float) 7.5,false,false);
+
     }
 }
