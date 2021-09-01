@@ -1,4 +1,4 @@
-package com.tistory.workshop;
+package com.tistory.workshop.Musketeer;
 
 
 import org.bukkit.entity.Egg;

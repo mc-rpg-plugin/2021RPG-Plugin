@@ -1,4 +1,4 @@
-package com.tistory.workshop;
+package com.tistory.workshop.Fighter;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

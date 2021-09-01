@@ -1,4 +1,4 @@
-package com.tistory.workshop;
+package com.tistory.workshop.Magition;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

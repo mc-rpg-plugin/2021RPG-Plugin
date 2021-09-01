@@ -1,4 +1,4 @@
-package com.tistory.workshop;
+package com.tistory.workshop.Berserker;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
