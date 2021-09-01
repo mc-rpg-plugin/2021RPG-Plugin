@@ -1,5 +1,6 @@
 package com.tistory.workshop.command;
 
+import com.tistory.workshop.jobs.JobVariable;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +30,6 @@ public class RPGCommand implements CommandExecutor {
                     }
                 }
             }
-
-            return true;
+        return true;
     }
 }
