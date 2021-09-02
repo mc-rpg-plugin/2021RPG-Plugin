@@ -15,6 +15,8 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -29,7 +31,7 @@ public class Assassin implements Listener {
     ItemStack killingstack = new ItemStack(Material.BONE_MEAL);
     ItemMeta killingstackmeta = (ItemMeta)killingstack.getItemMeta();
 
-    /*@EventHandler
+    @EventHandler
     public void escape(PlayerToggleSneakEvent e) {
 
         Player p = e.getPlayer();
@@ -47,15 +49,21 @@ public class Assassin implements Listener {
             saveLocation.remove(p.getUniqueId());
             previousLocation.remove(p.getUniqueId());
         }
-    }*/
+    }
 
     @EventHandler
     public void assassinate(EntityDamageByEntityEvent e) {
+        double rand = Math.random(); // 0.0 ~ 1.0
         if (e.getDamager() instanceof Player) {
             Player player = (Player) e.getDamager();
             Entity victim = e.getEntity();
-            ((Damageable) victim).damage((2+stack) * 1.5);
-            player.sendMessage("현재 피해량: " + (2+stack) * 1.5);
+            ((Damageable) victim).damage((2 + stack) * 1.5);
+            player.sendMessage("현재 피해량: " + (2 + stack) * 1.5);
+            player.sendMessage("현재 스텍: " + stack);
+            if((rand * 100) <= 2) {
+                ((Damageable) victim).damage(999999999);
+                player.sendMessage("즉사");
+            }
             Location victimLocation = victim.getLocation();
             double nx;
             double nz;
@@ -83,9 +91,16 @@ public class Assassin implements Listener {
             killingstackmeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             killingstack.setItemMeta(killingstackmeta);
             player.getInventory().addItem(killingstack);
-            for (ItemStack itemStack : player.getInventory().all(killingstack).values()) {
-                stack++;
+            ItemStack[] inv = player.getInventory().getContents();
+            int temp = 0;
+            for (ItemStack itemStack : inv) {
+                if (itemStack != null) {
+                    if (itemStack.getType() == Material.BONE_MEAL && itemStack.containsEnchantment(Enchantment.BINDING_CURSE)) {
+                        temp = temp + itemStack.getAmount();
+                    }
+                }
             }
+            stack = temp;
         }
     }
 
@@ -106,4 +121,6 @@ public class Assassin implements Listener {
             e.setCancelled(true);
         }
     }
+
+
 }

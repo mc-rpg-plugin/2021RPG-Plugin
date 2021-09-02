@@ -25,39 +25,34 @@ public class Book implements Listener {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);  // 반드시 WRITIEN_BOOK으로 하여야함
         BookMeta bookMeta = (BookMeta) book.getItemMeta();      // 해당 책의 메타타입을 설정함
 
+        // 능력들은 명령어랑 결합하고
+        // 직업 선택도 명령어로 하고
+        // 그외는 전부 기본 String으로 처리
 
-
-        BaseComponent[] quick_hook = new ComponentBuilder(ChatColor.DARK_RED + "[퀵 훅]")
+        BaseComponent[] quick_hook = new ComponentBuilder(ChatColor.DARK_RED + "[퀵 훅]\n")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription quick_hook"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("퀵 훅 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
-        // BaseComponent[] the_king
-
-        BaseComponent[] Fighter = new ComponentBuilder("FIGHTER")
-                .append(ChatColor.RED + "[체력]" + ChatColor.WHITE + "\t30")
-                .append(ChatColor.AQUA + "[기본 방어력]" + ChatColor.WHITE + "\t0")
-                .append(ChatColor.DARK_RED + "[퀵 훅]" + ChatColor.WHITE + "\t평타의 2배의 피해를 입힙니다.")
-                .append(quick_hook)
+        BaseComponent[] the_king = new ComponentBuilder(ChatColor.DARK_BLUE + "[더 킹]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription the_king"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("더 킹 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
-        BaseComponent[] page1 = new ComponentBuilder("Click me")
+        BaseComponent[] selectFighter = new ComponentBuilder(ChatColor.LIGHT_PURPLE + "[직업 선택]")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ setCharacter Fighter"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("파이터 클래스로 설정합니다.").create()))
-                .append("Hello")
                 .create();
 
-        
+        BaseComponent[] fighters = new ComponentBuilder("FIGHTER\n")
+                .append(ChatColor.RED + "[체력]" + ChatColor.BLACK + "  30\n")
+                .append(ChatColor.AQUA + "[기본 방어력]" + ChatColor.BLACK + "  0\n")
+                .append(quick_hook)
+                .append(the_king)
+                .append(selectFighter)
+                .create();
 
-
-
-
-
-
-
-        // 각 페이지당 노가다 뛰어야함
-
-        bookMeta.spigot().addPage(page1);    // 책 메타 타입에 페이지를 하나 추가함
+        bookMeta.spigot().addPage(fighters);    // 책 메타 타입에 페이지를 하나 추가함
 
         bookMeta.setTitle("JUST BOOK");     // 책 제목
         bookMeta.setAuthor("ME");   // 책 지은이
