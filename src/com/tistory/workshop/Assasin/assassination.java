@@ -12,13 +12,17 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class assassination implements Listener {
 
-        //주변 플레이어 위치 받아와서 그 플레이어에게 데미지를 주고 tp
+        double rand = Math.random();
+        int InstanceKill = (int)(rand * 100) + 1;
         @EventHandler
         public void assassinate(EntityDamageByEntityEvent e) {
             if (e.getDamager() instanceof Player) {
                 Player player = (Player) e.getDamager();
                 Entity victim = e.getEntity();
                 ((Damageable) victim).damage((2+assasin.stack) * 1.5);
+                if(InstanceKill >= 1 || InstanceKill <= 2){
+                    ((Damageable) victim).damage(999999999);
+                }
                 Location victimLocation = victim.getLocation();
                 double nx;
                 double nz;
