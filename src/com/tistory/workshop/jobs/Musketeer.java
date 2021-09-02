@@ -41,7 +41,6 @@ public class Musketeer implements Listener {
 
     @EventHandler
     public void throwGrenade(PlayerEggThrowEvent e) {
-        Player player = e.getPlayer();
 
         Egg egg = e.getEgg();
 
