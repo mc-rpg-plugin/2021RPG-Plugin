@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
 
 public class Main extends JavaPlugin implements Listener {
 
@@ -20,9 +19,9 @@ public class Main extends JavaPlugin implements Listener {
         console.sendMessage("[플러그인 활성화 중 입니다.]");
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new Book(), this);
-        // getServer().getPluginManager().registerEvents(new Musketeer(), this);
-        // getServer().getPluginManager().registerEvents(new Berserker(), this);
-        getServer().getPluginManager().registerEvents(new Assassin(), this);
+        //getServer().getPluginManager().registerEvents(new Musketeer(), this);
+        //getServer().getPluginManager().registerEvents(new Berserker(), this);
+        // getServer().getPluginManager().registerEvents(new Assassin(), this);
         getServer().getPluginManager().registerEvents(new Wizard(), this);
         // getServer().getPluginManager().registerEvents(new Fighter(), this);
 

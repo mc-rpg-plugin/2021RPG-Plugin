@@ -1,6 +1,7 @@
 package com.tistory.workshop.jobs;
 
-import org.bukkit.entity.Player;
+import org.bukkit.block.Block;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -34,10 +35,19 @@ public class Berserker implements Listener {
         Player player = e.getPlayer();
         Action action = e.getAction();
 
-        // 우 클릭시, 돌진함
         if ((action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR)) {
-            Vector playerVector = new Vector(player.getLocation().getDirection().getX(), 0, player.getLocation().getDirection().getZ());
-            player.setVelocity(playerVector.multiply(2));
+            Vector vector = new Vector(player.getLocation().getDirection().getX(), 0, player.getLocation().getDirection().getZ());
+            player.setVelocity(vector);
+            for (Entity entity : player.getNearbyEntities(2, 2, 2)) {
+                if (!(entity instanceof LivingEntity))
+                    continue;
+                for (Block block : player.getLineOfSight(null, 3)) {
+                    if (entity.getLocation().distance(block.getLocation()) > 3)
+                        continue;
+                    ((LivingEntity) entity).damage(8);
+                    player.setVelocity(new Vector(0, 0, 0));
+                }
+            }
         }
     }
 
