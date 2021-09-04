@@ -28,8 +28,8 @@ public class Assassin implements Listener {
 
 
     public static int stack = 0;
-    ItemStack killingstack = new ItemStack(Material.BONE_MEAL);
-    ItemMeta killingstackmeta = (ItemMeta)killingstack.getItemMeta();
+    ItemStack killingStack = new ItemStack(Material.BONE_MEAL);
+    ItemMeta killingStackMeta = (ItemMeta)killingStack.getItemMeta();
 
     @EventHandler
     public void escape(PlayerToggleSneakEvent e) {
@@ -78,19 +78,19 @@ public class Assassin implements Listener {
     }
 
     @EventHandler
-    public void killedstack(EntityDeathEvent e) {
+    public void killingStackUp(EntityDeathEvent e) {
 
         LivingEntity entity = e.getEntity();
         Player player = (Player) e.getEntity().getKiller();
         if (entity.getType() == EntityType.PLAYER) {
             stack = 0;
         }
-        if (killingstackmeta != null && player != null) {
-            killingstackmeta.addEnchant(Enchantment.BINDING_CURSE, 1, false);
-            killingstackmeta.setDisplayName(ChatColor.RED + "살인청부");
-            killingstackmeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            killingstack.setItemMeta(killingstackmeta);
-            player.getInventory().addItem(killingstack);
+        if (killingStackMeta != null && player != null) {
+            killingStackMeta.addEnchant(Enchantment.BINDING_CURSE, 1, false);
+            killingStackMeta.setDisplayName(ChatColor.RED + "살인청부");
+            killingStackMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            killingStack.setItemMeta(killingStackMeta);
+            player.getInventory().addItem(killingStack);
             ItemStack[] inv = player.getInventory().getContents();
             int temp = 0;
             for (ItemStack itemStack : inv) {

@@ -39,7 +39,7 @@ public class Musketeer implements Listener {
     }
 
     @EventHandler
-    public void gnd(PlayerEggThrowEvent e){
+    public void grenade(PlayerEggThrowEvent e){
 
         Egg egg = e.getEgg();
         egg.setVisualFire(true);
@@ -59,7 +59,7 @@ public class Musketeer implements Listener {
     }
 
     @EventHandler
-    public void BlackholeShot(ProjectileHitEvent e){
+    public void blackHoleShot(ProjectileHitEvent e){
         if(e.getEntity().getType() != EntityType.ARROW)
             return;
 
