@@ -26,12 +26,12 @@ public class Book implements Listener {
         // 파이터
 
         BaseComponent[] quick_hook = new ComponentBuilder(ChatColor.DARK_RED + "[퀵 훅]\n")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription quick_hook"))
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription quick_Hook"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("퀵 훅 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
         BaseComponent[] the_king = new ComponentBuilder(ChatColor.DARK_BLUE + "[더 킹]\n")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription the_king"))
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription the_King"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("더 킹 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
@@ -56,7 +56,7 @@ public class Book implements Listener {
                 .create();
 
         BaseComponent[] head_Shot = new ComponentBuilder(ChatColor.DARK_BLUE + "[헤드샷]\n")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription head_shot"))
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription head_Shot"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("헤드샷 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
@@ -111,7 +111,7 @@ public class Book implements Listener {
                 .create();
 
         BaseComponent[] selectWizard = new ComponentBuilder(ChatColor.LIGHT_PURPLE + "[직업 선택]")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ setCharacter selectWizard"))
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ setCharacter Wizard"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("마법사 클래스로 설정합니다.").create()))
                 .create();
 
@@ -136,7 +136,7 @@ public class Book implements Listener {
                 .create();
 
         BaseComponent[] killingStack = new ComponentBuilder(ChatColor.GOLD + "[살생의 경험]\n")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription killingStack"))
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription killing_Stack"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("살생의 경험에 대한 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 

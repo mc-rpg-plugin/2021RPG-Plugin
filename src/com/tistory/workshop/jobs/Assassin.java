@@ -26,7 +26,6 @@ public class Assassin implements Listener {
     private static HashMap<UUID, Location> saveLocation = new HashMap<UUID,Location>();
     private static HashMap<UUID,Location> previousLocation = new HashMap<UUID,Location>();
 
-
     public static int stack = 0;
     ItemStack killingStack = new ItemStack(Material.BONE_MEAL);
     ItemMeta killingStackMeta = (ItemMeta)killingStack.getItemMeta();
@@ -34,28 +33,35 @@ public class Assassin implements Listener {
     @EventHandler
     public void escape(PlayerToggleSneakEvent e) {
 
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
+        if (!JobVariable.getPlayerJob(player, "Assassin")) {
+            return;
+        }
 
-        if(p.isSneaking() && saveLocation.isEmpty()) {
-            saveLocation.put(p.getUniqueId(), p.getLocation());
-            p.sendMessage("위치저장!");
-        }else if (p.isSneaking()){
-            previousLocation.put(p.getUniqueId(),p.getLocation());
-            p.teleport(saveLocation.get(p.getUniqueId()));
-            p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,40,9999));
-            p.getWorld().createExplosion(previousLocation.get(p.getUniqueId()),3,false,false);
-            p.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
-            p.sendMessage("위치이동!");
-            saveLocation.remove(p.getUniqueId());
-            previousLocation.remove(p.getUniqueId());
+        if(player.isSneaking() && saveLocation.isEmpty()) {
+            saveLocation.put(player.getUniqueId(), player.getLocation());
+            player.sendMessage("위치저장!");
+        }else if (player.isSneaking()){
+            previousLocation.put(player.getUniqueId(),player.getLocation());
+            player.teleport(saveLocation.get(player.getUniqueId()));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,40,9999));
+            player.getWorld().createExplosion(previousLocation.get(player.getUniqueId()),3,false,false);
+            player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
+            player.sendMessage("위치이동!");
+            saveLocation.remove(player.getUniqueId());
+            previousLocation.remove(player.getUniqueId());
         }
     }
 
     @EventHandler
     public void assassinate(EntityDamageByEntityEvent e) {
+
         double rand = Math.random(); // 0.0 ~ 1.0
         if (e.getDamager() instanceof Player) {
             Player player = (Player) e.getDamager();
+            if (!JobVariable.getPlayerJob(player, "Assassin")) {
+                return;
+            }
             Entity victim = e.getEntity();
             ((Damageable) victim).damage((2 + stack) * 1.5);
             player.sendMessage("현재 피해량: " + (2 + stack) * 1.5);
@@ -79,15 +85,19 @@ public class Assassin implements Listener {
 
     @EventHandler
     public void killingStackUp(EntityDeathEvent e) {
-
+        if (e.getEntity().getKiller() == null)
+            return;
         LivingEntity entity = e.getEntity();
         Player player = (Player) e.getEntity().getKiller();
+        if (!JobVariable.getPlayerJob(player, "Assassin")) {
+            return;
+        }
         if (entity.getType() == EntityType.PLAYER) {
             stack = 0;
         }
         if (killingStackMeta != null && player != null) {
             killingStackMeta.addEnchant(Enchantment.BINDING_CURSE, 1, false);
-            killingStackMeta.setDisplayName(ChatColor.RED + "살인청부");
+            killingStackMeta.setDisplayName(ChatColor.RED + "살생의 경험");
             killingStackMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             killingStack.setItemMeta(killingStackMeta);
             player.getInventory().addItem(killingStack);

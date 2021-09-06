@@ -13,6 +13,9 @@ public class Fighter implements Listener {
     @EventHandler
     public void theKing(PlayerToggleSneakEvent e) {
         Player player = e.getPlayer();
+        if (!JobVariable.getPlayerJob(player, "Fighter")) {
+            return;
+        }
         Vector vector = new Vector(player.getLocation().getDirection().getX(), 0, player.getLocation().getDirection().getZ());
         vector.normalize();
         player.setVelocity(vector.multiply(1));

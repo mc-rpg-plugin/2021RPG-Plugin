@@ -17,13 +17,14 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         // 시작시, 작동할 코드
         console.sendMessage("[플러그인 활성화 중 입니다.]");
+        JobVariable.setAbilityCoolTimes();
         getServer().getPluginManager().registerEvents(this, this);
         getServer().getPluginManager().registerEvents(new Book(), this);
-        //getServer().getPluginManager().registerEvents(new Musketeer(), this);
-        //getServer().getPluginManager().registerEvents(new Berserker(), this);
-        // getServer().getPluginManager().registerEvents(new Assassin(), this);
+        getServer().getPluginManager().registerEvents(new Musketeer(), this);
+        getServer().getPluginManager().registerEvents(new Berserker(), this);
+        getServer().getPluginManager().registerEvents(new Assassin(), this);
         getServer().getPluginManager().registerEvents(new Wizard(), this);
-        // getServer().getPluginManager().registerEvents(new Fighter(), this);
+        getServer().getPluginManager().registerEvents(new Fighter(), this);
 
         getCommand("rpg_").setExecutor(new RPGCommand());
     }
