@@ -17,16 +17,19 @@ public class Berserker implements Listener {
     public void berserker(EntityDamageEvent e) {
         if (!(e.getEntity() instanceof Player)) return;
 
-        Player p = (Player) e.getEntity();
+        Player player = (Player) e.getEntity();
 
-        if (p.getHealth() - e.getDamage() <= 5) {
-            p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,600,4));
+        if (!JobVariable.getPlayerJob(player, "Berserker")) {
+            return;
         }
-        else if (p.getHealth() - e.getDamage() <= 7) {
-            p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,600,2));
+        if (player.getHealth() - e.getDamage() <= 5) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,600,4));
         }
-        else if (p.getHealth() - e.getDamage() <= 10) {
-            p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,600,2));
+        else if (player.getHealth() - e.getDamage() <= 7) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,600,2));
+        }
+        else if (player.getHealth() - e.getDamage() <= 10) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,600,2));
         }
     }
 
@@ -36,6 +39,9 @@ public class Berserker implements Listener {
         Action action = e.getAction();
 
         if ((action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR)) {
+            if (!JobVariable.getPlayerJob(player, "Berserker")) {
+                return;
+            }
             Vector vector = new Vector(player.getLocation().getDirection().getX(), 0, player.getLocation().getDirection().getZ());
             player.setVelocity(vector);
             for (Entity entity : player.getNearbyEntities(2, 2, 2)) {

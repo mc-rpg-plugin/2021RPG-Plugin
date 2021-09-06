@@ -13,48 +13,75 @@ public class JobVariable {
         return instance;
     }
 
-    public static HashMap<UUID, Boolean> playerAbility = new HashMap<UUID, Boolean>();  // 능력을 사용 중인지를 확인
-    public static HashMap<UUID, Long> cooldowns = new HashMap<UUID, Long>();
-    public static HashMap<UUID, Long> playerCooldown = new HashMap<UUID, Long>();
+    /*
+    - 직업을 저장하는 해시맵
+    - 현재 능력을 사용 중인지를 확인하는 해시맵
+    - 쿨타임을 저장하는 해시맵
+     */
 
-    public boolean hasPlayerActivateAbility(Player player) {
-        if (!playerAbility.containsKey(player.getUniqueId())) {
+    public static HashMap<UUID, String> playerJob = new HashMap<UUID, String>();            // 플레이어 직업
+    public static HashMap<UUID, Long> coolTimes = new HashMap<UUID, Long>();                // 쿨타임 저장
+    public static HashMap<UUID, Boolean> useAbilityNow = new HashMap<UUID, Boolean>();      // 현재 능력이 발동 중인지를 확인
+    public static HashMap<String, Integer> abilityCoolTime = new HashMap<String, Integer>();// 해당 능력에 부여되는 쿨타임
+
+    // 해당 능력에게 부여되는 쿨타임 (onEnable 에 초기에 넣어질 메소드)
+    public static void setAbilityCoolTimes() {
+        abilityCoolTime.clear();
+        abilityCoolTime.put("quick_hook", 15);
+        abilityCoolTime.put("the_king", 8);
+        abilityCoolTime.put("grenade", 20);
+        abilityCoolTime.put("head_shot", 0);
+        abilityCoolTime.put("rush", 15);
+        abilityCoolTime.put("berserker_Active", 0);
+        abilityCoolTime.put("lighting", 15);
+        abilityCoolTime.put("teleport", 20);
+        abilityCoolTime.put("assassinate", 0);
+        abilityCoolTime.put("escape", 30);
+        abilityCoolTime.put("killing_Stack", 0);
+    }
+
+    // 플레이어에게 능력을 지정하는 메소드
+    public static void setPlayerJob(Player player, String job) {
+        UUID playerUUID = player.getUniqueId();
+        playerJob.put(playerUUID, job);
+    }
+
+    public static boolean hasJob(Player player) {
+        if (playerJob.containsKey(player.getUniqueId())) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static String getPlayerJob(Player player) {
+        if (!hasJob(player)) {
+            player.sendMessage("아직 직업을 선택하지 않으셨습니다!");
+            return null;
+        }
+        return playerJob.get(player.getUniqueId());
+    }
+
+    public static boolean getPlayerJob(Player player, String job) {
+        if (!hasJob(player))
             return false;
+
+        return playerJob.get(player.getUniqueId()).equals(job);
+    }
+
+    // 쿨타임 조절하는 메소드 영역
+
+    public static void setCoolTime(UUID player, long time) {
+        if (time < 1) {
+            coolTimes.remove(player);
         }
-
-        return playerAbility.get(player.getUniqueId());
-    }
-
-    public void setPlayer(Player player) {
-        if (playerAbility.containsKey(player.getUniqueId())) {
-            return;
+        else {
+            coolTimes.put(player, time);
         }
-
-        playerAbility.put(player.getUniqueId(), false);
     }
 
-    public void setCooldowns(Player player, long time) {
-        if (time < 1)
-            cooldowns.remove(player.getUniqueId());
-        else
-            cooldowns.put(player.getUniqueId(), time);
+    public static long getCoolTime(UUID player) {
+        return coolTimes.getOrDefault(player, (long) 0);
     }
-
-    public long getCooldowns(Player player) {
-        return cooldowns.getOrDefault(player.getUniqueId(), (long)0);
-    }
-
-    public void setPlayerCooldown(Player player, long time) {
-        if (time < 0) return;
-        if (playerCooldown.containsKey(player.getUniqueId())) return;
-        playerCooldown.put(player.getUniqueId(), time);
-    }
-
-    public long getPlayerCooldown(Player player) {
-        if (playerCooldown.containsKey(player.getUniqueId()))
-            return playerCooldown.get(player.getUniqueId());
-        return 0;
-    }
-
 
 }

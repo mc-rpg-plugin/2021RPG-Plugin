@@ -23,6 +23,9 @@ public class Musketeer implements Listener {
             if (e.getEntity() instanceof Player) {
                 if (((Arrow) tool).getShooter() instanceof Player) {
                     Player shooter = (Player) ((Arrow) tool).getShooter();
+                    if (!JobVariable.getPlayerJob(shooter, "Musketeer")) {
+                        return;
+                    }
                     if (shooter != null) {
                         if (shotCount.containsKey(shooter.getUniqueId()) && shotCount.get(shooter.getUniqueId()) < 3) {
                             shotCount.put(shooter.getUniqueId(), shotCount.get(shooter.getUniqueId()) + 1);
@@ -39,7 +42,11 @@ public class Musketeer implements Listener {
     }
 
     @EventHandler
-    public void grenade(PlayerEggThrowEvent e){
+    public void grenade(PlayerEggThrowEvent e) {
+
+        if (!JobVariable.getPlayerJob(e.getPlayer(), "Musketeer")) {
+            return;
+        }
 
         Egg egg = e.getEgg();
         egg.setVisualFire(true);
@@ -70,6 +77,9 @@ public class Musketeer implements Listener {
 
             Player shooter = (Player) ent;
 
+            if (!JobVariable.getPlayerJob(shooter, "Musketeer")) {
+                return;
+            }
             double radius = 10D;
 
             List<Entity> nearEntity = arrow.getLocation().getWorld().getEntities();
