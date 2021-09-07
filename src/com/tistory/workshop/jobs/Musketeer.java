@@ -1,12 +1,18 @@
 package com.tistory.workshop.jobs;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerEggThrowEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.HashMap;
 import java.util.List;
@@ -89,9 +95,35 @@ public class Musketeer implements Listener {
                     if (entity == shooter)
                         continue;
                     entity.teleport(arrowlocation);
-
                 }
             }
         }
     }
+
+    @EventHandler
+    public void hunterWolf(PlayerInteractEvent e) {
+        Player player = e.getPlayer();
+        Action action = e.getAction();
+
+        if (!JobVariable.getPlayerJob(player, "Musketeer")) {
+            return;
+        }
+
+        if ((action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.IRON_INGOT) {
+            summonWolf(player, ChatColor.RED + "사냥개", 30, 4);
+            summonWolf(player, ChatColor.RED + "사냥개", 30, 4);
+        }
+    }
+
+    public void summonWolf(Player player, String name, float hp, float damage) {
+        Wolf wolf = (Wolf) player.getWorld().spawnEntity(player.getLocation(), EntityType.WOLF);
+        wolf.setCustomName(name);
+        wolf.setCustomNameVisible(true);
+        wolf.setOwner((AnimalTamer) player);
+        AttributeInstance health = wolf.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        health.setBaseValue(hp);
+        AttributeInstance attackDamage = wolf.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+        attackDamage.setBaseValue(damage);
+    }
+
 }
