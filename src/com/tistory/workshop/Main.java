@@ -10,7 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
 
-    // TODO 지금 구현한 책 테스트하여야함
     ConsoleCommandSender console = Bukkit.getConsoleSender();
 
     @Override

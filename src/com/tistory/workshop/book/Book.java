@@ -30,8 +30,8 @@ public class Book implements Listener {
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("퀵 훅 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
-        BaseComponent[] the_king = new ComponentBuilder(ChatColor.DARK_BLUE + "[더 킹]\n")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription the_King"))
+        BaseComponent[] the_king = new ComponentBuilder(ChatColor.DARK_BLUE + "[더킹]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription ducking"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("더 킹 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 

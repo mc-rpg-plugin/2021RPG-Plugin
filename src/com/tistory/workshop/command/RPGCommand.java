@@ -1,5 +1,6 @@
 package com.tistory.workshop.command;
 
+import com.tistory.workshop.jobs.Fighter;
 import com.tistory.workshop.jobs.JobVariable;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -30,6 +31,7 @@ public class RPGCommand implements CommandExecutor {
                             else {
                                 sender.sendMessage("파이터 클래스로 설정하였습니다.");
                                 JobVariable.setPlayerJob(player, "Fighter");
+                                Fighter.hasSneak.put(player.getUniqueId(), false);
                             }
                         }
                         else if (strings[1].equals("Musketeer")) {
@@ -88,8 +90,8 @@ public class RPGCommand implements CommandExecutor {
                                  sender.sendMessage("해당 플레이어가 능력을 발동 중인 상태라면");
                                  sender.sendMessage("3초간 스턴을 겁니다.");
                              }
-                             case "the_King" -> {
-                                 sender.sendMessage(ChatColor.DARK_RED + "[더 킹]");
+                             case "ducking" -> {
+                                 sender.sendMessage(ChatColor.DARK_RED + "[더킹]");
                                  sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 8초");
                                  sender.sendMessage("웅크리기를 통하여 작동하는 패시브형 능력입니다.");
                                  sender.sendMessage("바라보는 방향으로 빠르게 이동합니다.");
