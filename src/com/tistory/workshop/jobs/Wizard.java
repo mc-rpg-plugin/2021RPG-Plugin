@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -40,11 +42,17 @@ public class Wizard implements Listener {
 
         if ((action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.BLAZE_ROD) {
             if (JobVariable.getPlayerJob(player, "Wizard")) {
-                for (Block block : getBlocks(e.getClickedBlock(), 4)) {
-                    if (block == null)
-                        continue;
-                    player.getWorld().spawnParticle(Particle.DAMAGE_INDICATOR, block.getLocation(), 10);
+                ((Damageable)player).damage(4);
+                double Block = 20D;
 
+                List<LivingEntity> entity = player.getLocation().getWorld().getLivingEntities();
+
+                for(LivingEntity near : entity) {
+                    if (near == player)
+                        continue;
+                    if (near.getLocation().distance(player.getLocation()) <= Block) {
+                        near.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 2000, 1));
+                    }
                 }
             }
         }

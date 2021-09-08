@@ -3,14 +3,15 @@ package com.tistory.workshop;
 import com.tistory.workshop.jobs.*;
 import com.tistory.workshop.book.Book;
 import com.tistory.workshop.command.RPGCommand;
+import net.minecraft.world.entity.monster.EntitySkeleton;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
 
-    // TODO 지금 구현한 책 테스트하여야함
     ConsoleCommandSender console = Bukkit.getConsoleSender();
 
     @Override
