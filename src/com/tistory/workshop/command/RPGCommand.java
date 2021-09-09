@@ -95,7 +95,19 @@ public class RPGCommand implements CommandExecutor {
                                  sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 8초");
                                  sender.sendMessage("웅크리기를 통하여 작동하는 패시브형 능력입니다.");
                                  sender.sendMessage("바라보는 방향으로 빠르게 이동합니다.");
-                                 sender.sendMessage("이동되는 시간동안은 무적이 됩니다.");
+                                 sender.sendMessage("웅크리기하는 동안은 방어력이 2상승합니다.");
+                                 sender.sendMessage("웅크리기하는 동안은 공격이 불가능합니다. (단, 바디 블로우 제외)");
+                             }
+                             case "body_Blow" ->  {
+                                 sender.sendMessage(ChatColor.DARK_RED + "[바디 블로우]");
+                                 sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 15초");
+                                 sender.sendMessage("웅크리기를 하는 상태일 때만 사용가능한 액티브형 능력입니다.");
+                                 sender.sendMessage("생명체를 피격 시 자신이 바라보는 방향으로 멀리 띄웁니다.");
+                             }
+                             case "jab" -> {
+                                 sender.sendMessage(ChatColor.DARK_RED + "[잽]");
+                                 sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 0초");
+                                 sender.sendMessage("기존 피해량의 2배가 피해량으로 고정됩니다.");
                              }
                              case "grenade" -> {
                                  sender.sendMessage(ChatColor.DARK_RED + "[수류탄]");
@@ -109,6 +121,17 @@ public class RPGCommand implements CommandExecutor {
                                  sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 0초");
                                  sender.sendMessage("플레이어 공격 4회째마다 작동하는 패시브형 능력입니다.");
                                  sender.sendMessage("플레이어를 상대로 공격 4회째 공격 때 마다 기존 피해량의 2배를 입힙니다.");
+                             }
+                             case "black_Hole" -> {
+                                 sender.sendMessage(ChatColor.DARK_RED + "[중력자탄]");
+                                 sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 15초");
+                                 sender.sendMessage("화살을 블럭에 맞추면 주위에 있는 모든 엔티티(본인 제외)를 해당 블럭위치로 끌어당깁니다.");
+                             }
+                             case "wolf" -> {
+                                 sender.sendMessage(ChatColor.DARK_RED + "[사냥개]");
+                                 sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 30초");
+                                 sender.sendMessage("자신의 사냥개 (체력: 30, 공격력: 4) 2마리를 생성합니다.");
+                                 sender.sendMessage("해당 사냥개들은 자동으로 죽지않습니다.");
                              }
                              case "rush" -> {
                                  sender.sendMessage(ChatColor.DARK_RED + "[무모한 공격]");
@@ -124,6 +147,13 @@ public class RPGCommand implements CommandExecutor {
                                  sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "* 체력이 35%이하일때 - 힘 2증가");
                                  sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "* 체력이 25%이하일때 - 힘 4증가");
                              }
+                             case "blood_Flew" -> {
+                                 sender.sendMessage(ChatColor.DARK_RED + "[혈류 폭발]");
+                                 sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 20초");
+                                 sender.sendMessage("블럭을 좌클릭시, 해당 주변으로 피가 퍼지며");
+                                 sender.sendMessage("해당 피 이펙트 위에 있으면, 구속과 피해를 줍니다.");
+                                 sender.sendMessage("해당 피 이펙트는 5초가 지나면 자동으로 사라집니다.");
+                             }
                              case "lighting" -> {
                                  sender.sendMessage(ChatColor.DARK_RED + "[낙뢰]");
                                  sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 15초");
@@ -137,6 +167,17 @@ public class RPGCommand implements CommandExecutor {
                                  sender.sendMessage(ChatColor.BOLD + "지팡이" + ChatColor.RESET + "를 든 상태에서 우 클릭시 작동하는 액티브형 능력입니다.");
                                  sender.sendMessage(ChatColor.BOLD + "지팡이" + ChatColor.RESET + "를 든 상태에서 우 클릭시");
                                  sender.sendMessage("자신이 바라보는 블럭위치로 순간이동합니다. (최대거리: 10블럭)");
+                             }
+                             case "meteor" -> {
+                                 sender.sendMessage(ChatColor.DARK_RED + "[메태오]");
+                                 sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 40초");
+                                 sender.sendMessage("");
+                             }
+                             case "dark_Magic" -> {
+                                 sender.sendMessage(ChatColor.DARK_RED + "[금지된 흑마법]");
+                                 sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 25초");
+                                 sender.sendMessage("우클릭 시, 자신의 체력을 소모시켜서 주변에 있는 모든 생명체들에게");
+                                 sender.sendMessage("10초간 위더 효과를 줍니다.");
                              }
                              case "assassinate" -> {
                                  sender.sendMessage(ChatColor.DARK_RED + "[암살]");
@@ -158,6 +199,15 @@ public class RPGCommand implements CommandExecutor {
                                  sender.sendMessage("생명체 (엔티티)를 죽일 때마다" + ChatColor.BOLD + " 살생의 경험" + ChatColor.RESET + "을 하나씩 얻습니다.");
                                  sender.sendMessage("기존 피해량에 " + ChatColor.BOLD + "살생의 경험" + ChatColor.RESET + "갯수만큼 피해량이 추가됩니다.");
                                  sender.sendMessage(ChatColor.BOLD + "살생의 경험" + ChatColor.RESET + "은 죽을 시 초기화됩니다.");
+                                 sender.sendMessage("또, 피격할 때마다 상대방의 시야 반대로 이동합니다.");
+                             }
+                             case "request" -> {
+                                 sender.sendMessage(ChatColor.DARK_RED + "[의뢰]");
+                                 sender.sendMessage(ChatColor.AQUA + "쿨타임" + ChatColor.WHITE + ": 0초");
+                                 sender.sendMessage("처음으로 피격한 상대를 의뢰 대상으로 설정합니다.");
+                                 sender.sendMessage("의뢰 대상을 피격할 때마다 의뢰 대상에게 온갖 디버프를 랜덤하게 부여합니다. (한 번에 하나만 생기며, 지속시간은 5초입니다.");
+                                 sender.sendMessage("의뢰 대상이 죽을 때까지 의뢰 상태가 풀리지않습니다.");
+                                 sender.sendMessage("단, 도주를 사용한 경우 의뢰 대상이 사라집니다.");
                              }
                          }
                      }
