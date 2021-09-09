@@ -35,6 +35,16 @@ public class Book implements Listener {
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("더 킹 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
+        BaseComponent[] body_Blow = new ComponentBuilder(ChatColor.GRAY + "[바디 블로우]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription body_Blow"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("바디 블로우 설명을 보실려면 클릭하여주세요.").create()))
+                .create();
+
+        BaseComponent[] jab = new ComponentBuilder(ChatColor.GOLD + "[잽]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription jab"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("잽 설명을 보실려면 클릭하여주세요").create()))
+                .create();
+
         BaseComponent[] selectFighter = new ComponentBuilder(ChatColor.LIGHT_PURPLE + "[직업 선택]")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ setCharacter Fighter"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("파이터 클래스로 설정합니다.").create()))
@@ -45,6 +55,8 @@ public class Book implements Listener {
                 .append(ChatColor.AQUA + "[기본 방어력]" + ChatColor.BLACK + "  0\n")
                 .append(quick_hook)
                 .append(the_king)
+                .append(body_Blow)
+                .append(jab)
                 .append(selectFighter)
                 .create();
         
@@ -55,7 +67,18 @@ public class Book implements Listener {
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("수류탄 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
-        BaseComponent[] head_Shot = new ComponentBuilder(ChatColor.DARK_BLUE + "[헤드샷]\n")
+
+        BaseComponent[] black_Hole = new ComponentBuilder(ChatColor.DARK_BLUE + "[중력자탄]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg showDescription black_Hole"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("중력자탄 설명을 보실려면 클릭하여주세요.").create()))
+                .create();
+
+        BaseComponent[] wolf = new ComponentBuilder(ChatColor.GRAY + "[사냥개]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg showDescription wolf"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("사냥개 설명을 보실려면 클릭하여주세요.").create()))
+                .create();
+
+        BaseComponent[] head_Shot = new ComponentBuilder(ChatColor.GOLD + "[헤드샷]\n")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription head_Shot"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("헤드샷 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
@@ -69,18 +92,25 @@ public class Book implements Listener {
                 .append(ChatColor.RED + "[체력]" + ChatColor.BLACK + "  20\n")
                 .append(ChatColor.AQUA + "[기본 방어력]" + ChatColor.BLACK + "  0\n")
                 .append(grenade)
+                .append(black_Hole)
+                .append(wolf)
                 .append(head_Shot)
                 .append(selectMusketeer)
                 .create();
 
         // 버서커
-
-        BaseComponent[] rush = new ComponentBuilder(ChatColor.DARK_RED + "[무모한 공격]\n")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription rush"))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("무모한 공겨 설명을 보실려면 클릭하여주세요.").create()))
+        BaseComponent[] blood_Flew = new ComponentBuilder(ChatColor.DARK_RED + "[혈류 폭발]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription blood_Flew"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("혈류 폭발 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
-        BaseComponent[] berserker_Active = new ComponentBuilder(ChatColor.DARK_BLUE + "[광전사]\n")
+        BaseComponent[] rush = new ComponentBuilder(ChatColor.DARK_BLUE + "[무모한 공격]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription rush"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("무모한 공격 설명을 보실려면 클릭하여주세요.").create()))
+                .create();
+
+
+        BaseComponent[] berserker_Active = new ComponentBuilder(ChatColor.GOLD + "[광전사]\n")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription berserker_Active"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("광전사 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
@@ -93,6 +123,7 @@ public class Book implements Listener {
         BaseComponent[] berserker = new ComponentBuilder("BERSERKER\n")
                 .append(ChatColor.RED + "[체력]" + ChatColor.BLACK + "  40\n")
                 .append(ChatColor.AQUA + "[기본 방어력]" + ChatColor.BLACK + "  2\n")
+                .append(blood_Flew)
                 .append(rush)
                 .append(berserker_Active)
                 .append(selectBerserker)
@@ -105,7 +136,17 @@ public class Book implements Listener {
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("낙뢰 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
-        BaseComponent[] teleport = new ComponentBuilder(ChatColor.DARK_BLUE + "[텔레포트]\n")
+        BaseComponent[] dark_Magic = new ComponentBuilder(ChatColor.DARK_BLUE + "[금지된 흑마법]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription dark_Magic"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("금지된 흑마법 설명을 보실려면 클릭하여주세요.").create()))
+                .create();
+
+        BaseComponent[] meteor = new ComponentBuilder(ChatColor.GRAY + "[메태오]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription meteor"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("메태오 설명을 보실려면 클릭하여주세요.").create()))
+                .create();
+
+        BaseComponent[] teleport = new ComponentBuilder(ChatColor.GOLD + "[텔레포트]\n")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription teleport"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("텔레포트 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
@@ -119,6 +160,8 @@ public class Book implements Listener {
                 .append(ChatColor.RED + "[체력]" + ChatColor.BLACK + "  16\n")
                 .append(ChatColor.AQUA + "[기본 방어력]" + ChatColor.BLACK + "  0\n")
                 .append(lighting)
+                .append(dark_Magic)
+                .append(meteor)
                 .append(teleport)
                 .append(selectWizard)
                 .create();
@@ -133,6 +176,11 @@ public class Book implements Listener {
         BaseComponent[] escape = new ComponentBuilder(ChatColor.DARK_BLUE + "[도주]\n")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription escape"))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("도주 설명을 보실려면 클릭하여주세요.").create()))
+                .create();
+
+        BaseComponent[] request = new ComponentBuilder(ChatColor.GRAY + "[의뢰]\n")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/rpg_ showDescription request"))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("의뢰 설명을 보실려면 클릭하여주세요.").create()))
                 .create();
 
         BaseComponent[] killingStack = new ComponentBuilder(ChatColor.GOLD + "[살생의 경험]\n")
@@ -150,6 +198,7 @@ public class Book implements Listener {
                 .append(ChatColor.AQUA + "[기본 방어력]" + ChatColor.BLACK + "  0\n")
                 .append(assassinate)
                 .append(escape)
+                .append(request)
                 .append(killingStack)
                 .append(selectAssassin)
                 .create();

@@ -1,8 +1,8 @@
 package com.tistory.workshop.jobs;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -26,40 +26,69 @@ public class Wizard implements Listener {
 
         if ((action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.STICK) {
             if (JobVariable.getPlayerJob(player, "Wizard")) {
-                player.getWorld().strikeLightning(player.getTargetBlock(null, 10).getLocation());
+                if (JobVariable.isAvailable(player.getUniqueId(), "lighting")) {
+                    player.getWorld().strikeLightning(player.getTargetBlock(null, 10).getLocation());
+                    JobVariable.setCoolTime(player.getUniqueId(), System.currentTimeMillis(), "lighting");
+                }
+                else {
+                    player.sendMessage(ChatColor.BLUE + "[낙뢰]" + ChatColor.RESET + " 쿨타임 남은 시간: "
+                            + -1 * (JobVariable.getSkillCoolLeft(player.getUniqueId(), "lighting")) + "초");
+                }
             }
         } else if ((action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) && player.getInventory().getItemInMainHand().getType() == Material.STICK) {
             if (JobVariable.getPlayerJob(player, "Wizard")) {
-                float pitch = player.getLocation().getPitch();
-                float yaw = player.getLocation().getYaw();
-                Location targetLocation = player.getTargetBlock(null, 10).getLocation();
-                targetLocation.add(0, 1, 0);
-                targetLocation.setPitch(pitch);
-                targetLocation.setYaw(yaw);
-                player.teleport(targetLocation);
+                if (JobVariable.isAvailable(player.getUniqueId(), "teleport")) {
+                    float pitch = player.getLocation().getPitch();
+                    float yaw = player.getLocation().getYaw();
+                    Location targetLocation = player.getTargetBlock(null, 10).getLocation();
+                    targetLocation.add(0, 1, 0);
+                    targetLocation.setPitch(pitch);
+                    targetLocation.setYaw(yaw);
+                    player.teleport(targetLocation);
+                    JobVariable.setCoolTime(player.getUniqueId(), System.currentTimeMillis(), "teleport");
+                }
+                else {
+                    player.sendMessage(ChatColor.AQUA + "[텔레포트]" + ChatColor.RESET + " 쿨타임 남은 시간: "
+                            + -1 * (JobVariable.getSkillCoolLeft(player.getUniqueId(), "teleport")) + "초");
+                }
             }
         }
 
         if ((action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.BLAZE_ROD) {
             if (JobVariable.getPlayerJob(player, "Wizard")) {
-                ((Damageable)player).damage(4);
-                double Block = 20D;
 
-                List<LivingEntity> entity = player.getLocation().getWorld().getLivingEntities();
+                if (JobVariable.isAvailable(player.getUniqueId(), "dark_Magic")) {
+                    ((Damageable) player).damage(4);
+                    double Block = 20D;
 
-                for(LivingEntity near : entity) {
-                    if (near == player)
-                        continue;
-                    if (near.getLocation().distance(player.getLocation()) <= Block) {
-                        near.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 2000, 1));
+                    List<LivingEntity> entity = player.getLocation().getWorld().getLivingEntities();
+
+                    for (LivingEntity near : entity) {
+                        if (near == player)
+                            continue;
+                        if (near.getLocation().distance(player.getLocation()) <= Block) {
+                            near.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 200, 1));
+                        }
                     }
+                    JobVariable.setCoolTime(player.getUniqueId(), System.currentTimeMillis(), "dark_Magic");
+                }
+                else {
+                    player.sendMessage(ChatColor.BLACK + "[금지된 흑마법]" + ChatColor.RESET + " 쿨타임 남은 시간: "
+                            + -1 * (JobVariable.getSkillCoolLeft(player.getUniqueId(), "dark_Magic")) + "초");
                 }
             }
         }
         else if ((action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.BLAZE_ROD) {
             if (JobVariable.getPlayerJob(player, "Wizard")) {
-                LargeFireball f = player.launchProjectile(LargeFireball.class);
-                Block location = player.getTargetBlock(null, 10);
+                if (JobVariable.isAvailable(player.getUniqueId(), "meteor")) {
+                    LargeFireball f = player.launchProjectile(LargeFireball.class);
+                    Block location = player.getTargetBlock(null, 10);
+                    JobVariable.setCoolTime(player.getUniqueId(), System.currentTimeMillis(), "meteor");
+                }
+                else {
+                    player.sendMessage(ChatColor.DARK_RED + "[메태오]" + ChatColor.RESET + " 쿨타임 남은 시간: "
+                            + -1 * (JobVariable.getSkillCoolLeft(player.getUniqueId(), "meteor")) + "초");
+                }
             }
         }
     }

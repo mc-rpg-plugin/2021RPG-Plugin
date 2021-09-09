@@ -50,23 +50,33 @@ public class Musketeer implements Listener {
     @EventHandler
     public void grenade(PlayerEggThrowEvent e) {
 
-        if (!JobVariable.getPlayerJob(e.getPlayer(), "Musketeer")) {
+        Player player = e.getPlayer();
+
+        if (!JobVariable.getPlayerJob(player, "Musketeer")) {
             return;
         }
 
-        Egg egg = e.getEgg();
-        egg.setVisualFire(true);
+        if (JobVariable.isAvailable(player.getUniqueId(), "grenade")) {
 
-        if(egg.isEmpty()){
+            Egg egg = e.getEgg();
+            egg.setVisualFire(true);
 
-            egg.getWorld().createExplosion(egg.getLocation(),(float) 7.5,false,false);
-        }else{
-            egg.getWorld().createExplosion(egg.getLocation(),(float) 9,false,false);
-            egg.getWorld().createExplosion(egg.getLocation(),(float) 7.5,false,false);
-            egg.getWorld().createExplosion(egg.getLocation(),(float) 6,false,false);
-            egg.getWorld().createExplosion(egg.getLocation(),(float) 4.5,false,false);
-            egg.getWorld().createExplosion(egg.getLocation(),(float) 3,false,false);
+            if (egg.isEmpty()) {
 
+                egg.getWorld().createExplosion(egg.getLocation(), (float) 7.5, false, false);
+            } else {
+                egg.getWorld().createExplosion(egg.getLocation(), (float) 9, false, false);
+                egg.getWorld().createExplosion(egg.getLocation(), (float) 7.5, false, false);
+                egg.getWorld().createExplosion(egg.getLocation(), (float) 6, false, false);
+                egg.getWorld().createExplosion(egg.getLocation(), (float) 4.5, false, false);
+                egg.getWorld().createExplosion(egg.getLocation(), (float) 3, false, false);
+
+            }
+            JobVariable.setCoolTime(player.getUniqueId(), System.currentTimeMillis(), "grenade");
+        }
+        else {
+            player.sendMessage(ChatColor.BLACK + "[수류탄]" + ChatColor.WHITE + " 쿨타임 남은 시간: "
+                    + -1 * (JobVariable.getSkillCoolLeft(player.getUniqueId(), "grenade")) + "초");
         }
 
     }
@@ -86,16 +96,24 @@ public class Musketeer implements Listener {
             if (!JobVariable.getPlayerJob(shooter, "Musketeer")) {
                 return;
             }
-            double radius = 10D;
 
-            List<Entity> nearEntity = arrow.getLocation().getWorld().getEntities();
+            if (JobVariable.isAvailable(shooter.getUniqueId(), "black_Hole")) {
+                double radius = 10D;
 
-            for (Entity entity : nearEntity) {
-                if (entity.getLocation().distance(arrow.getLocation()) <= radius) {
-                    if (entity == shooter)
-                        continue;
-                    entity.teleport(arrowlocation);
+                List<Entity> nearEntity = arrow.getLocation().getWorld().getEntities();
+
+                for (Entity entity : nearEntity) {
+                    if (entity.getLocation().distance(arrow.getLocation()) <= radius) {
+                        if (entity == shooter)
+                            continue;
+                        entity.teleport(arrowlocation);
+                    }
                 }
+                JobVariable.setCoolTime(shooter.getUniqueId(), System.currentTimeMillis(), "black_Hole");
+            }
+            else {
+                shooter.sendMessage(ChatColor.AQUA + "[중력자탄]" + ChatColor.WHITE + " 쿨타임 남은 시간: "
+                        + -1 * (JobVariable.getSkillCoolLeft(shooter.getUniqueId(), "black_Hole")) + "초");
             }
         }
     }
@@ -110,8 +128,15 @@ public class Musketeer implements Listener {
         }
 
         if ((action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.IRON_INGOT) {
-            summonWolf(player, ChatColor.RED + "사냥개", 30, 4);
-            summonWolf(player, ChatColor.RED + "사냥개", 30, 4);
+            if (JobVariable.isAvailable(player.getUniqueId(), "wolf")) {
+                summonWolf(player, ChatColor.RED + "사냥개", 30, 4);
+                summonWolf(player, ChatColor.RED + "사냥개", 30, 4);
+                JobVariable.setCoolTime(player.getUniqueId(), System.currentTimeMillis(), "wolf");
+            }
+            else {
+                player.sendMessage(ChatColor.GRAY + "[사냥개]" + ChatColor.WHITE + " 쿨타임 남은 시간: "
+                        + -1 * (JobVariable.getSkillCoolLeft(player.getUniqueId(), "wolf")) + "초");
+            }
         }
     }
 
